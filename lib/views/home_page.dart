@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.menu),
+              icon: const Icon(Icons.home),
               onPressed: () {
                 // Handle drawer button press
                 Scaffold.of(context).openDrawer();

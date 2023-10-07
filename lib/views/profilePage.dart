@@ -237,6 +237,30 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+              if(intialIndex==0)
+              {
+                Navigator.of(context).pushNamed("home");
+              }
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_circle,size: 35,),
+              onPressed: () {
+               setState(() {
+                 intialIndex =1;
+               });
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
