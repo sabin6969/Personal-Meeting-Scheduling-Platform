@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
                 onPressed: () {
@@ -23,18 +24,22 @@ class _HomePageState extends State<HomePage> {
                       context: context,
                       builder: (context) {
                         return Dialog(
-                          child: Column(
-                            children: [
-                              Text('Are you sure you want to logout?'),
-                              ElevatedButton(
-                                onPressed: () {
-                                  auth.signOut();
-                                  Navigator.pushReplacementNamed(
-                                      context, "login");
-                                },
-                                child: Text('Yes'),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Are you sure you want to logout?'),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    auth.signOut();
+                                    Navigator.pushReplacementNamed(
+                                        context, "login");
+                                  },
+                                  child: Text('Yes'),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       });
