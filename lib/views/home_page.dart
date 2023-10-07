@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Import this for date formatting
+import 'package:intl/intl.dart';
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart'; // Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -16,11 +17,12 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gmeet'),
+        centerTitle: true,
+        title: const Text('Gmeet'),
         backgroundColor: Colors.orange,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Handle notifications button press
             },
@@ -31,21 +33,17 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.orange,
-              ),
-              child: Text(
-                'Welcome to Gmeet',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+            UserAccountsDrawerHeader(
+              accountName: Text(auth.currentUser!.displayName ?? "Geust"),
+              accountEmail: Text(auth.currentUser!.email ?? "loading"),
+              currentAccountPicture: const CircleAvatar(
+                radius: 40,
+                child: Icon(Icons.person),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Sign Out'),
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('Sign Out'),
               onTap: () {
                 showDialog(
                   context: context,
@@ -56,14 +54,14 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Are you sure you want to logout?'),
+                            const Text('Are you sure you want to logout?'),
                             ElevatedButton(
                               onPressed: () {
                                 // Perform logout action
                                 Navigator.pushReplacementNamed(
                                     context, "login");
                               },
-                              child: Text('Yes'),
+                              child: const Text('Yes'),
                             ),
                           ],
                         ),
@@ -83,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               greeting, // Display the greeting
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -91,12 +89,12 @@ class _HomePageState extends State<HomePage> {
             Text(
               DateFormat.yMMMMd()
                   .format(DateTime.now()), // Display today's date
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 16), // Add some spacing
+            const SizedBox(height: 16), // Add some spacing
 
             // Product planning card
             Card(
@@ -106,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Product Planning',
                       style: TextStyle(
                         fontSize: 18,
@@ -114,14 +112,14 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Description of the product planning goes here.',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -129,10 +127,10 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             // Handle invite button press
                           },
-                          icon: Icon(Icons.add),
-                          label: Text('Invite'),
+                          icon: const Icon(Icons.add),
+                          label: const Text('Invite'),
                         ),
-                        Icon(Icons.more_vert), // Add your end icon here
+                        const Icon(Icons.more_vert), // Add your end icon here
                       ],
                     ),
                   ],
@@ -147,14 +145,14 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.menu),
+              icon: const Icon(Icons.menu),
               onPressed: () {
                 // Handle drawer button press
                 Scaffold.of(context).openDrawer();
               },
             ),
             IconButton(
-              icon: Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle),
               onPressed: () {
                 // Handle my account button press
               },

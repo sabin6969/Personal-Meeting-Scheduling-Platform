@@ -27,7 +27,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.light),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch: Colors.orange,
+        ),
         initialRoute: "login",
         routes: {
           "home": (context) => const HomePage(),
