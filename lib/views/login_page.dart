@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
+import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
+import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
+import 'package:personalmeetingschedulingplatform/validations/password_validations.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,8 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    ShowPasswordProvider showPasswordProvider =
+        Provider.of<ShowPasswordProvider>(context, listen: false);
     var size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: SafeArea(
@@ -26,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Form(
+                key: globalKey,
                 child: Column(
                   children: [
                     Padding(
@@ -36,6 +46,15 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            validator: (value) {
+                              final message =
+                                  EmailValidation.validateEmail(value!);
+                              return message;
+                            },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.email,
@@ -53,18 +72,41 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: size.height * 0.03,
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              hintStyle: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              hintText: "Enter your password",
-                              prefixIcon: const Icon(Icons.lock),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
+                          Consumer<ShowPasswordProvider>(
+                            builder: (context, value, child) {
+                              return TextFormField(
+                                validator: (value) {
+                                  final message =
+                                      PasswordValidation.validatePassword(
+                                          value!);
+                                  return message;
+                                },
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                obscureText: showPasswordProvider.isHidden,
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      value.changeHiddenStatus();
+                                    },
+                                    icon: value.isHidden
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off),
+                                  ),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  hintText: "Enter your password",
+                                  prefixIcon: const Icon(Icons.lock),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           SizedBox(
                             height: size.height * 0.01,
@@ -74,7 +116,15 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               Row(
                                 children: [
-                                  Checkbox(value: false, onChanged: (value) {}),
+                                  Consumer<RememberMeProvider>(
+                                      builder: (context, value, child) {
+                                    return Checkbox(
+                                      value: value.isSelected,
+                                      onChanged: (v) {
+                                        value.changeSelectedStatus(v!);
+                                      },
+                                    );
+                                  }),
                                   const Text(
                                     "Remember me",
                                     style: TextStyle(
@@ -104,7 +154,9 @@ class _LoginPageState extends State<LoginPage> {
                             minWidth: size.width,
                             color: const Color(0xFFEF8509),
                             height: size.height * 0.06,
-                            onPressed: () {},
+                            onPressed: () {
+                              if (globalKey.currentState!.validate()) {}
+                            },
                             child: const Text(
                               "Login",
                               style: TextStyle(
@@ -139,15 +191,16 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    "Signup",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ))
+                                onPressed: () {},
+                                child: const Text(
+                                  "Signup",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              )
                             ],
                           )
                         ],
