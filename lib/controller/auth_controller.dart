@@ -11,8 +11,9 @@ class AuthController {
     ReusableDiaglogBox.dialgoBox(context);
     auth
         .signInWithEmailAndPassword(email: email, password: password)
-        .then((value) {})
-        .onError(
+        .then((value) {
+      Navigator.pushReplacementNamed(context, "home");
+    }).onError(
       (error, stackTrace) {
         ReusableDiaglogBox.hideLoadingDialogBox(context);
         if (error is FirebaseAuthException) {
@@ -38,6 +39,7 @@ class AuthController {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       debugPrint("Loading");
+      Navigator.of(context).pushReplacementNamed("home");
     }).onError((error, stackTrace) {
       debugPrint("An error occured");
     });
