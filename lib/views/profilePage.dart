@@ -13,6 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
   int intialIndex = 0;
   bool isSwitched = false;
   bool ischange = false;
+  int counter =0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +29,13 @@ class _ProfilePageState extends State<ProfilePage> {
               size: 30,
               color: Colors.black,
             ),
+            
             onPressed: () {
               setState(() {
                 intialIndex = 0;
                 ischange = false;
+              
+                
               });
             },
           ),
@@ -48,6 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 setState(() {
                   intialIndex = 1;
                   ischange = true;
+                 
+                  
                 });
               },
             )
@@ -228,6 +234,30 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             )
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+              if(intialIndex==0)
+              {
+                Navigator.of(context).pushNamed("home");
+              }
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_circle,size: 35,),
+              onPressed: () {
+               setState(() {
+                 intialIndex =1;
+               });
+              },
+            ),
           ],
         ),
       ),

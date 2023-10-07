@@ -24,12 +24,16 @@ class SplashScreen extends StatelessWidget {
         child: Column(children: [
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.sizeOf(context).height * 0.38,
+                vertical: MediaQuery.sizeOf(context).height * 0.4,
                 horizontal: 80),
             child: Image(image: AssetImage("asset/images/Glogo.png")),
-          )
+          ),
+
+          
+    
         ]),
       ),
+      
     );
   }
 }

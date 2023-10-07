@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
           "settingpage": (context) => SettingPage(),
           "aboutus": (context) => const AboutUsScreen(),
           "addmeeting": (context) => AddMeetingPage(),
+         
         },
       ),
     );
