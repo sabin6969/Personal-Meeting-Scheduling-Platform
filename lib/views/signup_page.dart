@@ -58,10 +58,9 @@ class _SignupPageState extends State<SignupPage> {
                               fontWeight: FontWeight.bold,
                             ),
                             validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your name';
-                              }
-                              return null;
+                              final message =
+                                  NameValidator.validateName(value!);
+                              return message;
                             },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
