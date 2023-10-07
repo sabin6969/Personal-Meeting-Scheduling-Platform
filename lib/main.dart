@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
+import 'package:personalmeetingschedulingplatform/views/about_us.dart';
 import 'package:personalmeetingschedulingplatform/views/add_meeting_page.dart';
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
 import 'package:personalmeetingschedulingplatform/views/home_page.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
+import 'package:personalmeetingschedulingplatform/views/profile_page.dart';
+import 'package:personalmeetingschedulingplatform/views/setting_page.dart';
 
 // import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:personalmeetingschedulingplatform/views/splash_screen.dart';
@@ -42,6 +45,9 @@ class MyApp extends StatelessWidget {
           "login": (context) => const LoginPage(),
           "forgotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
+          "profilepage": (context) => ProfilePage(),
+          "settingpage": (context) => SettingPage(),
+          "aboutus": (context) => const AboutUsScreen(),
           "addmeeting": (context) => AddMeetingPage(),
         },
       ),

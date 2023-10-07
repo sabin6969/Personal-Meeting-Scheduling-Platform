@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'package:personalmeetingschedulingplatform/controller/url_laucher.dart';
-import 'package:personalmeetingschedulingplatform/utils/ask_for_logout_dialog.dart'; // Import this for date formatting
+import 'package:personalmeetingschedulingplatform/utils/ask_for_logout_dialog.dart';
+import 'profile_page.dart'; // Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -156,7 +157,8 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: const Icon(Icons.account_circle),
               onPressed: () {
-                // Handle my account button press
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
               },
             ),
           ],
