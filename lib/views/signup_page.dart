@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    //GlobalKey key =
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
