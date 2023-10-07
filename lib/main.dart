@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(brightness: Brightness.light),
         initialRoute: "splash",
         routes: {
-          "splash": (context) => const ProfilePage(),
+          "splash": (context) => const SplashScreen(),
           "fogotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
         },
