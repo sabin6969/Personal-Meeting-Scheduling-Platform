@@ -7,7 +7,7 @@ import 'package:personalmeetingschedulingplatform/validations/password_validatio
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key});
+  const SignupPage({super.key,});
 
   @override
   State<SignupPage> createState() => _SignupPageState();
