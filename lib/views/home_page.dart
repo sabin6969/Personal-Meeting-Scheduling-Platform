@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart'; // Import this for date formatting
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
+import 'package:personalmeetingschedulingplatform/controller/url_laucher.dart';
+import 'package:personalmeetingschedulingplatform/utils/ask_for_logout_dialog.dart'; // Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -10,6 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final stream = FirebaseFirestore.instance
+      .collection("usersData")
+      .doc(auth.currentUser!.uid)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     // Get the current time for greeting
@@ -34,7 +41,16 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(auth.currentUser!.displayName ?? "Geust"),
+              accountName: StreamBuilder(
+                  stream: stream,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const LinearProgressIndicator();
+                    } else {
+                      final data = snapshot.data!.get("name");
+                      return Text(data);
+                    }
+                  }),
               accountEmail: Text(auth.currentUser!.email ?? "loading"),
               currentAccountPicture: const CircleAvatar(
                 radius: 40,
@@ -42,33 +58,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
+              onTap: () {
+                UrlLauncher.launchSource();
+              },
+              leading: const Icon(
+                Icons.code,
+              ),
+              title: const Text("View Source Code"),
+            ),
+            ListTile(
               leading: const Icon(Icons.exit_to_app),
               title: const Text('Sign Out'),
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text('Are you sure you want to logout?'),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Perform logout action
-                                Navigator.pushReplacementNamed(
-                                    context, "login");
-                              },
-                              child: const Text('Yes'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
+                AskForLogOut.askForLogOut(context);
               },
             ),
           ],

@@ -44,6 +44,12 @@ class AuthController {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       ReusableDiaglogBox.hideLoadingDialogBox(context);
+      FirebaseFirestore.instance
+          .collection("usersData")
+          .doc(auth.currentUser!.uid)
+          .set(
+        {"name": name},
+      );
       Navigator.pushReplacementNamed(context, "home");
     }).onError((error, stackTrace) {
       ReusableDiaglogBox.hideLoadingDialogBox(context);
