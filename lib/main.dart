@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:personalmeetingschedulingplatform/views/signup_page.dart';
 
 void main() async {
-  // nonsense
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
