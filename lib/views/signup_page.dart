@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
+import 'package:personalmeetingschedulingplatform/validations/password_validations.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -14,7 +15,11 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    //GlobalKey key =
+    final _formKey = GlobalKey<FormState>();
+    String email = '';
+    String password = '';
+    String name = '';
+    String age = '';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -29,6 +34,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     Padding(
@@ -70,6 +76,9 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            validator: (value) {
+                              EmailValidation.validateEmail(value!);
+                            },
                           ),
                           SizedBox(
                             height: size.height * 0.03,
@@ -87,6 +96,9 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            validator: (value) {
+                              PasswordValidation.validatePassword(value!);
+                            },
                           ),
                           SizedBox(
                             height: size.height * 0.03,
@@ -104,6 +116,7 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            validator: (value) {},
                           ),
                           SizedBox(
                             height: size.height * 0.01,
