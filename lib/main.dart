@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light),
-        initialRoute: "login",
+        initialRoute: "splash",
         routes: {
-          "login": (context) => const SplashScreen(),
+          "splash": (context) => const SplashScreen(),
           "fogotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
         },
