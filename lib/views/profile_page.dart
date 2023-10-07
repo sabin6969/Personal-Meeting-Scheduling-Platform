@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'login_page.dart';
 import 'home_page.dart';
 import 'setting_page.dart';
@@ -6,6 +7,7 @@ import 'setting_page.dart';
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
@@ -39,7 +41,7 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'John Doe', // User's name
+              'Pawan Ghimire', // User's name
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -48,33 +50,40 @@ class ProfilePage extends StatelessWidget {
             Text(
               'Software Engineer', // User's designation
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 14,
                 color: Colors.grey,
               ),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  color: Colors.orange,
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Container(
+                margin: EdgeInsets.all(10),
+                height: size.height * 0.05,
+                color: Color.fromRGBO(255, 227, 202, 1),
+                width: double.infinity,
+                child: Center(
                   child: Text(
-                    'user@example.com', // User's email
-                    style: TextStyle(color: Colors.white),
+                    auth.currentUser!.email.toString(), // User's email
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  color: Colors.blue,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Container(
+                margin: EdgeInsets.all(10),
+                height: size.height * 0.05,
+                color: const Color.fromRGBO(218, 226, 255, 1),
+                width: double.infinity,
+                child: Center(
                   child: Text(
-                    'Company XYZ', // Company name
-                    style: TextStyle(color: Colors.white),
+                    'Company: Gateway Group', // Company name
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
-              ],
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -83,7 +92,10 @@ class ProfilePage extends StatelessWidget {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
               },
-              child: Text('Logout'),
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

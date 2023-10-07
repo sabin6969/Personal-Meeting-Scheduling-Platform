@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personalmeetingschedulingplatform/views/about_us.dart';
 import 'profile_page.dart';
 
 class SettingPage extends StatelessWidget {
@@ -11,7 +12,8 @@ class SettingPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
           },
         ),
       ),
@@ -68,7 +70,8 @@ class SettingPage extends StatelessWidget {
             title: Text('About Us'),
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
-              // Handle About Us tap
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutUsScreen()));
             },
           ),
           ListTile(

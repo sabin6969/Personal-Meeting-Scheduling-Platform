@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personalmeetingschedulingplatform/views/setting_page.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -10,6 +11,12 @@ class AboutUsScreen extends StatelessWidget {
           centerTitle: true,
           title: Text('About us'),
           backgroundColor: Colors.orange,
+           leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()));
+          },
+        ),
         ),
         body: SingleChildScrollView(
           child: Column(

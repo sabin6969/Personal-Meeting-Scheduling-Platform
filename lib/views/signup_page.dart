@@ -4,6 +4,7 @@ import 'package:personalmeetingschedulingplatform/controller/auth_controller.dar
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
+import 'package:personalmeetingschedulingplatform/validations/name_validation.dart';
 import 'package:personalmeetingschedulingplatform/validations/password_validations.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignupPageState createState() => _SignupPageState();
 }
 
