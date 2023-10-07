@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-       Future.delayed(Duration(seconds: 2), () {
+       Future.delayed(Duration(seconds: 1), () {
       // Navigate to the main screen after the delay
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
