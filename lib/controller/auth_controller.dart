@@ -13,6 +13,7 @@ class AuthController {
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
       ReusableDiaglogBox.hideLoadingDialogBox(context);
+      Navigator.pushReplacementNamed(context, "home");
     }).onError(
       (error, stackTrace) {
         ReusableDiaglogBox.hideLoadingDialogBox(context);
