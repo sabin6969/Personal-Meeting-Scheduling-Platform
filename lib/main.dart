@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
+import 'package:personalmeetingschedulingplatform/views/signup_page.dart';
 
 void main() async {
   // nonsense
@@ -18,9 +19,10 @@ class MyApp extends StatelessWidget {
       title: "Personal Meeting Scheduling App",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.light),
-      initialRoute: "login",
+      initialRoute: "signup",
       routes: {
         "login": (context) => const LoginPage(),
+        "signup": (context) => const SignupPage(),
       },
     );
   }
