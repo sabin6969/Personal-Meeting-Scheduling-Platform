@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'package:personalmeetingschedulingplatform/controller/url_laucher.dart';
 import 'package:personalmeetingschedulingplatform/utils/ask_for_logout_dialog.dart';
-import 'profile_page.dart'; // Import this for date formatting
+import 'package:personalmeetingschedulingplatform/views/meeting_page.dart';
+import 'package:personalmeetingschedulingplatform/views/profile_page.dart'; // Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -14,14 +15,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
   final stream = FirebaseFirestore.instance
       .collection("usersData")
       .doc(auth.currentUser!.uid)
       .snapshots();
+  PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
     // Get the current time for greeting
-    String greeting = getGreeting();
+    // String greeting = getGreeting();
 
     return Scaffold(
       appBar: AppBar(
@@ -43,15 +46,16 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: StreamBuilder(
-                  stream: stream,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const LinearProgressIndicator();
-                    } else {
-                      final data = snapshot.data!.get("name");
-                      return Text(data);
-                    }
-                  }),
+                stream: stream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const LinearProgressIndicator();
+                  } else {
+                    final data = snapshot.data!.get("name");
+                    return Text(data);
+                  }
+                },
+              ),
               accountEmail: Text(auth.currentUser!.email ?? "loading"),
               currentAccountPicture: const CircleAvatar(
                 radius: 40,
