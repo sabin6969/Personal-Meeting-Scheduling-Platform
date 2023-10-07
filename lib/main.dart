@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light),
-        initialRoute: "aboutus",
+        initialRoute: "login",
         routes: {
           "home": (context) => const HomePage(),
           "login": (context) => const LoginPage(),
