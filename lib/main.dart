@@ -40,7 +40,6 @@ class MyApp extends StatelessWidget {
           "signup": (context) => const SignupPage(),
           "profilepage": (context) =>  ProfilePage(),
           "settingpage": (context) =>  SettingPage(),
-          "aboutuspage": (context) => const AboutUsPage(),
         },
       ),
     );
