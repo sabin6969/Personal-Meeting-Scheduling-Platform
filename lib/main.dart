@@ -5,8 +5,10 @@ import 'package:personalmeetingschedulingplatform/provider/show_password_provide
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:personalmeetingschedulingplatform/views/signup_page.dart';
 
 void main() async {
+  // nonsense
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -26,10 +28,11 @@ class MyApp extends StatelessWidget {
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light),
-        initialRoute: "login",
+        initialRoute: "signup",
         routes: {
           "login": (context) => const LoginPage(),
           "fogotpassword": (context) => const ForgotScreenPage(),
+          "signup": (context) => const SignupPage(),
         },
       ),
     );
