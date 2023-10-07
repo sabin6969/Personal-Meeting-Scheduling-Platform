@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "973747228728",
+    "project_id": "personalmeetingscheduling",
+    "storage_bucket": "personalmeetingscheduling.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973747228728:android:4a9b2b962cc2e5aa8016cd",
+        "android_client_info": {
+          "package_name": "com.example.personalmeetingschedulingplatform"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRmD4m_Xqci9i0F-7j_DxIq3JbMW4xBDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
