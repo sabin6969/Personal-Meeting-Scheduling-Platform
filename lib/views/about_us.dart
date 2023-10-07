@@ -7,6 +7,7 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(onPressed: (){}, icon: Icon(Icons.home)),
           centerTitle: true,
           title: Text('About us'),
           backgroundColor: Colors.orange,
