@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
@@ -15,6 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: emailController,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -75,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           Consumer<ShowPasswordProvider>(
                             builder: (context, value, child) {
                               return TextFormField(
+                                controller: passwordController,
                                 validator: (value) {
                                   final message =
                                       PasswordValidation.validatePassword(
@@ -135,9 +140,12 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, "forgotpassword");
+                                },
                                 child: const Text(
-                                  "Forget password?",
+                                  "Forgot password?",
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -155,7 +163,13 @@ class _LoginPageState extends State<LoginPage> {
                             color: const Color(0xFFEF8509),
                             height: size.height * 0.06,
                             onPressed: () {
-                              if (globalKey.currentState!.validate()) {}
+                              if (globalKey.currentState!.validate()) {
+                                AuthController.signInUser(
+                                  emailController.text.trim(),
+                                  passwordController.text,
+                                  context,
+                                );
+                              }
                             },
                             child: const Text(
                               "Login",
@@ -191,7 +205,10 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, 'signup');
+                                },
                                 child: const Text(
                                   "Signup",
                                   style: TextStyle(
