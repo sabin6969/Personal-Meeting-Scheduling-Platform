@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
+import 'package:personalmeetingschedulingplatform/views/home_page.dart';
 
 // import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:personalmeetingschedulingplatform/views/splash_screen.dart';
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
         initialRoute: "splash",
         routes: {
           "splash": (context) => const SplashScreen(),
-          "fogotpassword": (context) => const ForgotScreenPage(),
+          "home": (context) => const HomePage(),
+          "login": (context) => const LoginPage(),
+          "forgotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
         },
       ),
