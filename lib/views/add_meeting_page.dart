@@ -63,152 +63,154 @@ class _AddMeetingPageState extends State<AddMeetingPage> {
         title: Text('Add Meeting'),
         backgroundColor: Colors.orange,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Create new meeting',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(
-                hintText: 'Meeting Title',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Create new meeting',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Choose Date:'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.calendar_today),
-                      onPressed: () {
-                        _selectDate(context);
-                      },
-                    ),
-                    Text(
-                      "${selectedDate.toLocal()}".split(' ')[0],
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Choose Time:'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.access_time),
-                      onPressed: () {
-                        _selectTime(context);
-                      },
-                    ),
-                    Text(
-                      "${selectedTime.format(context)}",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: descriptionController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Description',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text('Choose Category:'),
-            Row(
-              children: categoryOptions.map((category) {
-                final buttonColor = getRandomColor();
-                return Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        selectedCategory = category;
-                        // Update the selectedCategory when a button is clicked
-                      },
-                      child: Text(category),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(buttonColor),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                  ],
-                );
-              }).toList(),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Show a dialog to add a new category
-                  },
-                  child: Text('+ New'),
-                ),
-              ],
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Create meeting based on the text editing controllers
-                    // You can access the titleController.text, descriptionController.text, and selectedCategory here
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: Text(
-                      'Create Meeting',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    backgroundColor: Colors.orange,
+              SizedBox(height: 10),
+              TextField(
+                controller: titleController,
+                decoration: InputDecoration(
+                  hintText: 'Meeting Title',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Choose Date:'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.calendar_today),
+                        onPressed: () {
+                          _selectDate(context);
+                        },
+                      ),
+                      Text(
+                        "${selectedDate.toLocal()}".split(' ')[0],
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Choose Time:'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.access_time),
+                        onPressed: () {
+                          _selectTime(context);
+                        },
+                      ),
+                      Text(
+                        "${selectedTime.format(context)}",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: descriptionController,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  hintText: 'Description',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Text('Choose Category:'),
+              Row(
+                children: categoryOptions.map((category) {
+                  final buttonColor = getRandomColor();
+                  return Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          selectedCategory = category;
+                          // Update the selectedCategory when a button is clicked
+                        },
+                        child: Text(category),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(buttonColor),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 7,
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Show a dialog to add a new category
+                    },
+                    child: Text('+ New'),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Create meeting based on the text editing controllers
+                      // You can access the titleController.text, descriptionController.text, and selectedCategory here
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Text(
+                        'Create Meeting',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      backgroundColor: Colors.orange,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
