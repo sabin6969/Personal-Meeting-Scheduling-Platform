@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
+import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:provider/provider.dart';
 import 'package:personalmeetingschedulingplatform/views/signup_page.dart';
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
         initialRoute: "signup",
         routes: {
           "login": (context) => const LoginPage(),
+          "fogotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
-          "forgotpassword": (context) => const ForgotPasswor(),
         },
       ),
     );
