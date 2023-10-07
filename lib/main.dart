@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
 void main() async {
+  // nonsense
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
