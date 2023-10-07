@@ -94,6 +94,7 @@ class _AddMeetingPageState extends State<AddMeetingPage> {
                   child: Text('Choose Date:'),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       icon: Icon(Icons.calendar_today),
@@ -113,6 +114,7 @@ class _AddMeetingPageState extends State<AddMeetingPage> {
                   child: Text('Choose Time:'),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       icon: Icon(Icons.access_time),
