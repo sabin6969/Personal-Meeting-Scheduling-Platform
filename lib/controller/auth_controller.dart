@@ -24,9 +24,12 @@ class AuthController {
   }
 
   static sendResetLink(String email, BuildContext context) async {
+    ReusableDiaglogBox.dialgoBox(context);
     await auth.sendPasswordResetEmail(email: email).then((value) {
+      ReusableDiaglogBox.hideLoadingDialogBox(context);
       ToastMessage.showToastMessage("Check email for reset link");
     }).onError((error, stackTrace) {
+      ReusableDiaglogBox.hideLoadingDialogBox(context);
       ToastMessage.showToastMessage("An error occured");
     });
   }

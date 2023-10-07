@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
 
 class ForgotScreenPage extends StatefulWidget {
@@ -68,7 +69,10 @@ class _ForgotScreenPageState extends State<ForgotScreenPage> {
                     color: const Color(0xFFEF8509),
                     height: size.height * 0.06,
                     onPressed: () {
-                      if (globalKey.currentState!.validate()) {}
+                      if (globalKey.currentState!.validate()) {
+                        AuthController.sendResetLink(
+                            emailController.text.trim(), context);
+                      }
                     },
                     child: const Text(
                       "Send reset link",

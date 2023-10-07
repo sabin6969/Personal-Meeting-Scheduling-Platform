@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:personalmeetingschedulingplatform/utils/flutter_toast_message.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
+import 'package:personalmeetingschedulingplatform/validations/name_validation.dart';
 import 'package:personalmeetingschedulingplatform/validations/password_validations.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
@@ -15,11 +17,11 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final _formKey = GlobalKey<FormState>();
-    String email = '';
-    String password = '';
-    String name = '';
-    String age = '';
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -34,7 +36,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   children: [
                     Padding(
@@ -45,6 +47,12 @@ class _SignupPageState extends State<SignupPage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: nameController,
+                            validator: (value) {
+                              final message =
+                                  NameValidator.validateName(value!);
+                              return message;
+                            },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.person,
@@ -63,6 +71,7 @@ class _SignupPageState extends State<SignupPage> {
                             height: size.height * 0.03,
                           ),
                           TextFormField(
+                            controller: emailController,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.email,
@@ -77,13 +86,16 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                             validator: (value) {
-                              EmailValidation.validateEmail(value!);
+                              final message =
+                                  EmailValidation.validateEmail(value!);
+                              return message;
                             },
                           ),
                           SizedBox(
                             height: size.height * 0.03,
                           ),
                           TextFormField(
+                            controller: passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
                               hintStyle: const TextStyle(
@@ -97,13 +109,16 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                             validator: (value) {
-                              PasswordValidation.validatePassword(value!);
+                              final message =
+                                  PasswordValidation.validatePassword(value!);
+                              return message;
                             },
                           ),
                           SizedBox(
                             height: size.height * 0.03,
                           ),
                           TextFormField(
+                            controller: confirmPasswordController,
                             obscureText: true,
                             decoration: InputDecoration(
                               hintStyle: const TextStyle(
@@ -116,7 +131,11 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: (value) {},
+                            validator: (value) {
+                              final message =
+                                  PasswordValidation.validatePassword(value!);
+                              return message;
+                            },
                           ),
                           SizedBox(
                             height: size.height * 0.01,
@@ -129,7 +148,16 @@ class _SignupPageState extends State<SignupPage> {
                             color: const Color(0xFFEF8509),
                             height: size.height * 0.06,
                             onPressed: () {
-                              // Handle signup logic here
+                              if (formKey.currentState!.validate()) {
+                                if (confirmPasswordController.text
+                                        .compareTo(passwordController.text) ==
+                                    0) {
+                                } else {
+                                  ToastMessage.showToastMessage(
+                                    "Both password must match",
+                                  );
+                                }
+                              }
                             },
                             child: const Text(
                               "Sign Up",
@@ -173,7 +201,7 @@ class _SignupPageState extends State<SignupPage> {
                                   // Navigate to the login page
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                      builder: (context) => LoginPage(),
+                                      builder: (context) => const LoginPage(),
                                     ),
                                   );
                                 },

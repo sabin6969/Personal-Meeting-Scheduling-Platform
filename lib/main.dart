@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:personalmeetingschedulingplatform/views/signup_page.dart';
 
 void main() async {
-  // nonsense
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light),
-        initialRoute: "signup",
+        initialRoute: "login",
         routes: {
           "login": (context) => const LoginPage(),
           "fogotpassword": (context) => const ForgotScreenPage(),
