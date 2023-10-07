@@ -144,14 +144,22 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.amber,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.home),
+              icon: const Icon(Icons.home,size: 40,),
               onPressed: () {
                 // Handle drawer button press
                 Scaffold.of(context).openDrawer();
+              },
+            ),
+
+            IconButton(
+              icon: const Icon(Icons.add,size: 35,),
+              onPressed: () {
+                Navigator.pushNamed(context,"addmeeting");
               },
             ),
             IconButton(

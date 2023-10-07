@@ -238,11 +238,12 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.amber,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.home),
+              icon: const Icon(Icons.home,size: 40,),
               onPressed: () {
               if(intialIndex==0)
               {
@@ -250,16 +251,16 @@ class _ProfilePageState extends State<ProfilePage> {
               }
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.account_circle,size: 35,),
-              onPressed: () {
-               setState(() {
-                 intialIndex =0;
+            // IconButton(
+            //   icon: const Icon(Icons.account_circle,size: 35,),
+            //   onPressed: () {
+            //    setState(() {
+            //      intialIndex =0;
 
                  
-               });
-              },
-            ),
+            //    });
+            //   },
+            // ),
           ],
         ),
       ),
