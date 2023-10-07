@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
-import 'package:personalmeetingschedulingplatform/utils/flutter_toast_message.dart';
+import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
+import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
+import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/validations/email_validation.dart';
 import 'package:personalmeetingschedulingplatform/validations/name_validation.dart';
 import 'package:personalmeetingschedulingplatform/validations/password_validations.dart';
-import 'package:personalmeetingschedulingplatform/views/login_page.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key});
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
+  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    ShowPasswordProvider showPasswordProvider =
+        Provider.of<ShowPasswordProvider>(context, listen: false);
     var size = MediaQuery.of(context).size;
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    TextEditingController nameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,12 +36,12 @@ class _SignupPageState extends State<SignupPage> {
                 height: size.height * 0.40,
                 width: size.width,
                 child: Image.asset(
-                  "asset/images/Logo.png", // Replace with your logo image path
+                  "asset/images/Logo.png",
                   fit: BoxFit.cover,
                 ),
               ),
               Form(
-                key: formKey,
+                key: globalKey,
                 child: Column(
                   children: [
                     Padding(
@@ -48,10 +53,15 @@ class _SignupPageState extends State<SignupPage> {
                         children: [
                           TextFormField(
                             controller: nameController,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                             validator: (value) {
-                              final message =
-                                  NameValidator.validateName(value!);
-                              return message;
+                              if (value!.isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
                             },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -68,10 +78,19 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
                           SizedBox(
-                            height: size.height * 0.03,
+                            height: size.height * 0.02,
                           ),
                           TextFormField(
                             controller: emailController,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            validator: (value) {
+                              final message =
+                                  EmailValidation.validateEmail(value!);
+                              return message;
+                            },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Icons.email,
@@ -85,40 +104,62 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: (value) {
-                              final message =
-                                  EmailValidation.validateEmail(value!);
-                              return message;
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          Consumer<ShowPasswordProvider>(
+                            builder: (context, value, child) {
+                              return TextFormField(
+                                controller: passwordController,
+                                validator: (value) {
+                                  final message =
+                                      PasswordValidation.validatePassword(
+                                          value!);
+                                  return message;
+                                },
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                obscureText: showPasswordProvider.isHidden,
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      value.changeHiddenStatus();
+                                    },
+                                    icon: value.isHidden
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off),
+                                  ),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  hintText: "Enter your password",
+                                  prefixIcon: const Icon(Icons.lock),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                           SizedBox(
-                            height: size.height * 0.03,
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              hintStyle: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              hintText: "Enter your password",
-                              prefixIcon: const Icon(Icons.lock),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: (value) {
-                              final message =
-                                  PasswordValidation.validatePassword(value!);
-                              return message;
-                            },
-                          ),
-                          SizedBox(
-                            height: size.height * 0.03,
+                            height: size.height * 0.02,
                           ),
                           TextFormField(
                             controller: confirmPasswordController,
+                            validator: (value) {
+                              if (value != passwordController.text) {
+                                return 'Passwords do not match';
+                              }
+                              return null;
+                            },
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                             obscureText: true,
                             decoration: InputDecoration(
                               hintStyle: const TextStyle(
@@ -131,14 +172,48 @@ class _SignupPageState extends State<SignupPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            validator: (value) {
-                              final message =
-                                  PasswordValidation.validatePassword(value!);
-                              return message;
-                            },
                           ),
                           SizedBox(
                             height: size.height * 0.01,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Consumer<RememberMeProvider>(
+                                      builder: (context, value, child) {
+                                    return Checkbox(
+                                      value: value.isSelected,
+                                      onChanged: (v) {
+                                        value.changeSelectedStatus(v!);
+                                      },
+                                    );
+                                  }),
+                                  const Text(
+                                    "Remember me",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, "forgotpassword");
+                                },
+                                child: const Text(
+                                  "Forgot password?",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                           MaterialButton(
                             shape: RoundedRectangleBorder(
@@ -148,15 +223,13 @@ class _SignupPageState extends State<SignupPage> {
                             color: const Color(0xFFEF8509),
                             height: size.height * 0.06,
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                if (confirmPasswordController.text
-                                        .compareTo(passwordController.text) ==
-                                    0) {
-                                } else {
-                                  ToastMessage.showToastMessage(
-                                    "Both password must match",
-                                  );
-                                }
+                              if (globalKey.currentState!.validate()) {
+                                AuthController.signUpUser(
+                                  nameController.text.trim(),
+                                  emailController.text.trim(),
+                                  passwordController.text,
+                                  context,
+                                );
                               }
                             },
                             child: const Text(
@@ -174,16 +247,12 @@ class _SignupPageState extends State<SignupPage> {
                           const Text(
                             "Or",
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                           SizedBox(
                             width: size.width,
                             child: GoogleAuthButton(
-                              onPressed: () {
-                                // Handle Google sign up logic here
-                              },
+                              onPressed: () {},
                             ),
                           ),
                           Row(
@@ -198,12 +267,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  // Navigate to the login page
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginPage(),
-                                    ),
-                                  );
+                                  Navigator.pushNamed(context, "login");
                                 },
                                 child: const Text(
                                   "Login",
@@ -213,7 +277,7 @@ class _SignupPageState extends State<SignupPage> {
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ],
