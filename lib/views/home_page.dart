@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:personalmeetingschedulingplatform/controller/auth_controller.dart';
 import 'package:personalmeetingschedulingplatform/controller/url_laucher.dart';
 import 'package:personalmeetingschedulingplatform/utils/ask_for_logout_dialog.dart';
-import 'profile_page.dart'; // Import this for date formatting
+// Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -25,9 +25,9 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Gmeet'),
-        backgroundColor: Colors.orange,
+     
+        title: const Image(image: AssetImage("asset/images/Glogo.png",),width: 150,),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),

@@ -254,7 +254,9 @@ class _ProfilePageState extends State<ProfilePage> {
               icon: const Icon(Icons.account_circle,size: 35,),
               onPressed: () {
                setState(() {
-                 intialIndex =1;
+                 intialIndex =0;
+
+                 
                });
               },
             ),
