@@ -8,15 +8,18 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //test
-    Future<void> delayFunction() async {
-      await Future.delayed(Duration(seconds: 1));
+
+
+       Future.delayed(Duration(seconds: 2), () {
+      // Navigate to the main screen after the delay
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => LoginPage(),
         ),
       );
-    }
+    });
+
+
 
     return Scaffold(
       body: SizedBox(
