@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
+import 'package:personalmeetingschedulingplatform/views/add_meeting_page.dart';
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
 import 'package:personalmeetingschedulingplatform/views/home_page.dart';
 import 'package:personalmeetingschedulingplatform/views/login_page.dart';
@@ -30,7 +31,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Personal Meeting Scheduling App",
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.light),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch: Colors.orange,
+        ),
         initialRoute: "splash",
         routes: {
           "splash": (context) => const SplashScreen(),
@@ -38,6 +42,7 @@ class MyApp extends StatelessWidget {
           "login": (context) => const LoginPage(),
           "forgotpassword": (context) => const ForgotScreenPage(),
           "signup": (context) => const SignupPage(),
+          "addmeeting": (context) => AddMeetingPage(),
         },
       ),
     );

@@ -12,6 +12,7 @@ class AuthController {
     auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
+      ReusableDiaglogBox.hideLoadingDialogBox(context);
       Navigator.pushReplacementNamed(context, "home");
     }).onError(
       (error, stackTrace) {
@@ -38,13 +39,23 @@ class AuthController {
 
   static signUpUser(
       String name, String email, String password, BuildContext context) async {
+    ReusableDiaglogBox.dialgoBox(context);
     auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      debugPrint("Loading");
-      Navigator.of(context).pushReplacementNamed("home");
+      ReusableDiaglogBox.hideLoadingDialogBox(context);
+      FirebaseFirestore.instance
+          .collection("usersData")
+          .doc(auth.currentUser!.uid)
+          .set(
+        {"name": name},
+      );
+      Navigator.pushReplacementNamed(context, "home");
     }).onError((error, stackTrace) {
-      debugPrint("An error occured");
+      ReusableDiaglogBox.hideLoadingDialogBox(context);
+      if (error is FirebaseAuthException) {
+        ToastMessage.showToastMessage(error.code.toString());
+      }
     });
   }
 }
