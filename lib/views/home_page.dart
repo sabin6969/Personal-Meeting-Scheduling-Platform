@@ -154,9 +154,9 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle,size: 35,),
               onPressed: () {
-                // Handle my account button press
+                Navigator.pushNamed(context,"profile");
               },
             ),
           ],
