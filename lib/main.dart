@@ -4,6 +4,7 @@ import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
 import 'package:personalmeetingschedulingplatform/views/home_page.dart';
+import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 
 // import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:personalmeetingschedulingplatform/views/splash_screen.dart';
