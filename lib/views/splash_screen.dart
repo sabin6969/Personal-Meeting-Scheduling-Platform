@@ -30,11 +30,6 @@ class SplashScreen extends StatelessWidget {
           )
         ]),
       ),
-      bottomNavigationBar: SizedBox(
-        width: MediaQuery.sizeOf(context).width,
-        height: MediaQuery.sizeOf(context).height * 0.13,
-        child: Image(image: AssetImage("asset/images/logo.png")),
-      ),
     );
   }
 }
