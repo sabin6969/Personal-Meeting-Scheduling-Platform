@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Import this for date formatting
+import 'package:intl/intl.dart';
+import 'profile_page.dart'; // Import this for date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -156,7 +157,8 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.account_circle),
               onPressed: () {
-                // Handle my account button press
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
               },
             ),
           ],
