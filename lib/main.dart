@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:personalmeetingschedulingplatform/provider/remember_me_provider.dart';
 import 'package:personalmeetingschedulingplatform/provider/show_password_provider.dart';
 import 'package:personalmeetingschedulingplatform/views/forgot_password_screen.dart';
-import 'package:personalmeetingschedulingplatform/views/profilePage.dart';
+
 // import 'package:personalmeetingschedulingplatform/views/login_page.dart';
 import 'package:personalmeetingschedulingplatform/views/splash_screen.dart';
 import 'package:provider/provider.dart';
